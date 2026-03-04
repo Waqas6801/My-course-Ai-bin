@@ -1,0 +1,1 @@
+print("the sum of 5 and 5 is", 5+5)
