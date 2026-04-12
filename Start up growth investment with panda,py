@@ -1,0 +1,129 @@
+import pandas as pd
+
+# Read CSV file
+df = pd.read_csv(r'C:\Users\dell\Documents\GitHub\My-course-Ai-bin\startup_growth_investment_data.csv',delimiter=",",)
+print(df)
+print("df - data types" , df.dtypes)
+#Display first few rows
+
+print("First 5 rows:")
+print(df.head())
+
+# Data types
+print("\nData Types:")
+print(df.dtypes)
+
+# Dataset info
+print("\nDataset Info:")
+df.info()
+
+# Last four rows
+print("\nLast four rows:")
+print(df.tail(4))
+
+# First four rows
+print("\nFirst four rows:")
+print(df.head(4))
+
+# Summary statistics
+print("\nSummary statistics:")
+print(df.describe(include='all'))
+
+# Shape
+print("\nRows and Columns:", df.shape)
+
+# ------------------ COLUMN ACCESS ------------------
+
+# Get column names safely
+columns = df.columns
+print("\nColumn Names:", columns)
+
+# Access single column (first column)
+col1 = df[columns[0]]
+print(f"\nSingle column ({columns[0]}):")
+print(col1)
+
+# Access multiple columns (first two columns)
+if len(columns) >= 2:
+    col2 = df[[columns[0], columns[1]]]
+    print(f"\nFirst two columns:")
+    print(col2)
+
+# ------------------ LOC ------------------
+
+# Single row using loc
+row1 = df.loc[df.index[0]]
+print("\nSingle row using loc:")
+print(row1)
+
+# Multiple rows using loc
+row2 = df.loc[df.index[1:4]]
+print("\nMultiple rows using loc:")
+print(row2)
+
+# Slice rows and single column
+row3 = df.loc[df.index[2]:df.index[6], columns[0]]
+print("\nSlice rows using loc:")
+print(row3)
+
+# Conditional selection (if numeric column exists)
+numeric_cols = df.select_dtypes(include='number').columns
+if len(numeric_cols) > 0:
+    condition = df[numeric_cols[0]] > df[numeric_cols[0]].mean()
+    row4 = df.loc[condition]
+    print(f"\nConditional rows ({numeric_cols[0]} > mean):")
+    print(row4)
+
+# Selecting single column using loc
+column1 = df.loc[:, columns[0]]
+print("\nSingle column using loc:")
+print(column1)
+
+# Selecting multiple columns using loc
+if len(columns) >= 2:
+    column2 = df.loc[:, [columns[0], columns[1]]]
+    print("\nMultiple columns using loc:")
+    print(column2)
+
+# Slice columns
+column3 = df.loc[:, columns[0]:columns[min(3, len(columns)-1)]]
+print("\nSlice columns using loc:")
+print(column3)
+
+# ------------------ ILOC ------------------
+
+# Single row
+iloc1 = df.iloc[0]
+print("\nSingle row using iloc:")
+print(iloc1)
+
+# Multiple rows
+iloc2 = df.iloc[[2,4]] if len(df) > 4 else df.iloc[[0]]
+print("\nMultiple rows using iloc:")
+print(iloc2)
+
+# Slice rows
+iloc3 = df.iloc[1:6]
+print("\nSlice rows using iloc:")
+print(iloc3)
+
+# Single column
+iloc4 = df.iloc[:,0]
+print("\nSingle column using iloc:")
+print(iloc4)
+
+# Multiple columns
+if len(columns) >= 3:
+    iloc5 = df.iloc[:,[0,2]]
+    print("\nMultiple columns using iloc:")
+    print(iloc5)
+
+# Slice columns
+iloc6 = df.iloc[:,0:3]
+print("\nSlice columns using iloc:")
+print(iloc6)
+
+# Combined row and column selection
+iloc7 = df.iloc[1:4, 0:3]
+print("\nCombined selection using iloc:")
+print(iloc7)
